@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: rsa-encryption-service
-        image: ${REPOSITORY_TAG}
+        image: frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0
         resources:
           requests:
              memory: 200Mi
