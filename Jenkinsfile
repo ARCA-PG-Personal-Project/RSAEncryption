@@ -5,8 +5,8 @@ pipeline {
         SERVICE_NAME = "rsa-encryption-service"
         ORGANIZATION_NAME = "arca-pg-personal-project"
         DOCKERHUB_USERNAME = "frankisinfotech"
-	    composeFile = "docker-compose.yml"
-	    REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
+	composeFile = "docker-compose.yml"
+	REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
     }
     
     stages {
@@ -21,9 +21,9 @@ pipeline {
             steps {
                  withDockerRegistry([credentialsId: 'docker-hub', url: ""]) {
                    // sh 'docker build -t ${REPOSITORY_TAG} --build-arg DBHOST="$DBHOST" --build-arg DBUSER="$DBUSER" --build-arg DBPASSWORD="$DBPASSWORD"  --build-arg AGENCYDATABASE="$AGENCYDATABASE" .'
-                   sh 'docker build -t ${REPOSITORY_TAG} .'
+                  //  sh 'docker build -t ${REPOSITORY_TAG} .'
 	           sh "docker-compose -f ${composeFile}  up -d"
-	           sh 'docker push ${REPOSITORY_TAG}'          
+	           sh 'docker push rsaencryption-web:1'          
              }
           }
           
