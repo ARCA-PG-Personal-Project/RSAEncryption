@@ -7,7 +7,7 @@ RUN apt-get update \
    && apt-get clean
 RUN pip --no-cache-dir install -r requirements.txt app
 EXPOSE 8000
-CMD ["python", "app/main.py"]
+CMD ["python3", "app/main.py"]
 
 
 # FROM python:3.9-slim
