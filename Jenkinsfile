@@ -21,12 +21,12 @@ pipeline {
             steps {
                  withDockerRegistry([credentialsId: 'docker-hub', url: ""]) {
                    // sh 'docker build -t ${REPOSITORY_TAG} --build-arg DBHOST="$DBHOST" --build-arg DBUSER="$DBUSER" --build-arg DBPASSWORD="$DBPASSWORD"  --build-arg AGENCYDATABASE="$AGENCYDATABASE" .'
-                    sh 'docker-compose build' // -t ${REPOSITORY_TAG} .'
-		    //sh 'docker tag rsaencryption-web:1 frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'
-		    //sh 'docker tag rsaencryption-web:1 frankisinfotech/rsaencryption-web:1.0'
-		    sh 'docker-compose push' // frankisinfotech/rsaencryption-web:1.0' //-f ${composeFile}  up -d"
-	            sh 'docker-compose up -d'
-	           //sh 'docker push ${REPOSITORY_TAG}'          
+                    sh 'docker build -t ${REPOSITORY_TAG} .'
+		    sh 'docker push ${REPOSITORY_TAG}'             
+		  //sh 'docker tag rsaencryption-web:1 frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'
+		  //  sh 'docker-compose push' // frankisinfotech/rsaencryption-web:1.0' //-f ${composeFile}  up -d"
+	          //  sh 'docker-compose up -d'
+	           
              }
           }
           
