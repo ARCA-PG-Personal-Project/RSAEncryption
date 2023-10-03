@@ -23,7 +23,9 @@ pipeline {
                    // sh 'docker build -t ${REPOSITORY_TAG} --build-arg DBHOST="$DBHOST" --build-arg DBUSER="$DBUSER" --build-arg DBPASSWORD="$DBPASSWORD"  --build-arg AGENCYDATABASE="$AGENCYDATABASE" .'
                   //  sh 'docker build -t ${REPOSITORY_TAG} .'
 	           sh "docker-compose -f ${composeFile}  up -d"
-	           sh 'docker push rsaencryption-web:1'          
+	           sh 'docker tag rsaencryption-web:1 frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'
+'		 
+	           sh 'docker push frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'          
              }
           }
           
