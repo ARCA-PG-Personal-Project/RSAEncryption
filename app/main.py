@@ -1,4 +1,4 @@
-import *
+import os, sys, app
 
 from app.baseEncryption import *
 from fastapi import FastAPI, Header, HTTPException, Depends
