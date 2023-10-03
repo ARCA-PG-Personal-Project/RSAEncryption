@@ -24,7 +24,6 @@ pipeline {
                   //  sh 'docker build -t ${REPOSITORY_TAG} .'
 	           sh "docker-compose -f ${composeFile}  up -d"
 	           sh 'docker tag rsaencryption-web:1 frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'
-'		 
 	           sh 'docker push frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'          
              }
           }
