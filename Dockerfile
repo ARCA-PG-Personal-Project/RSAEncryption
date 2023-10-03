@@ -6,6 +6,8 @@ RUN apt-get update \
    && apt-get install gcc -y \	
    && apt-get clean
 RUN pip --no-cache-dir install -r requirements.txt
+CMD ["python", "./main.py"]
+
 
 # FROM python:3.9-slim
 
