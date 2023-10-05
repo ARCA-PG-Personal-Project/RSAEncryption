@@ -29,7 +29,10 @@ pipeline {
                 script {
                     // Deploy the Kubernetes manifests
 		    sh "aws eks update-kubeconfig --region eu-west-1 --name $CLUSTERID"
-                    sh '$kubectl apply -f deployment.yaml -n arca-payment-service'
+		    def tag = "${REPOSITORY_TAG}"
+		    def deploymentYaml = readFile('deployment.yaml').replaceAll('\\$\\{REPOSITORY_TAG\\}', tag)
+		    writeFile file: 'processed-deployment.yaml', text: deploymentYaml
+		    sh '$kubectl apply -f processed-deployment.yaml -n arca-payment-service'                    
                     sh '$kubectl apply -f service.yaml -n arca-payment-service'
                 }
             }
