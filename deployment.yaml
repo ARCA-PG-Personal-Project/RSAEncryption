@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: rsaencryption-web:1  # Replace with your actual image name and tag
+        image: ${REPOSITORY_TAG}  # Replace with your actual image name and tag
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
