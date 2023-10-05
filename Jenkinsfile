@@ -14,8 +14,8 @@ pipeline {
 		withDockerRegistry([credentialsId: 'docker-hub', url: ""]){
                 script {
                     // Build the Docker image
-                    docker.build('rsaencryption-web:1', '-f Dockerfile .')
-		    sh 'docker push rsaencryption-web:1'
+                    docker.build('${REPOSITORY_TAG}', '-f Dockerfile .')
+		    sh 'docker push ${REPOSITORY_TAG}'
                 }
 		}
             }
