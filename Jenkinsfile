@@ -10,29 +10,18 @@ pipeline {
     }
     
     stages {
-//         stage ('Preparing') {
-//             steps {
-//                 cleanWs()
-//                 git credentialsId: 'Github', url: "git@github.com:wasp-networks/Arca.UserManagement.git" //${ORGANIZATION_NAME}/${SERVICE_NAME}"
-//             }
-//         }
-        
-        stage ('Build and Push Image') {
+        stage('Build') {
             steps {
-                 withDockerRegistry([credentialsId: 'docker-hub', url: ""]) {
-                   // sh 'docker build -t ${REPOSITORY_TAG} --build-arg DBHOST="$DBHOST" --build-arg DBUSER="$DBUSER" --build-arg DBPASSWORD="$DBPASSWORD"  --build-arg AGENCYDATABASE="$AGENCYDATABASE" .'
-                    sh 'docker build -t ${REPOSITORY_TAG} .'
-		    sh 'docker push ${REPOSITORY_TAG}'             
-		  //sh 'docker tag rsaencryption-web:1 frankisinfotech/arca-pg-personal-project-rsaencryption-web:1.0'
-		  //  sh 'docker-compose push' // frankisinfotech/rsaencryption-web:1.0' //-f ${composeFile}  up -d"
-	          //  sh 'docker-compose up -d'
-	           
-             }
-          }
-          
-       }
-        
-       stage("Install kubectl"){
+		withDockerRegistry([credentialsId: 'docker-hub', url: ""]){
+                script {
+                    // Build the Docker image
+                    docker.build('your_image_name:1', '-f Dockerfile .')
+                }
+		}
+            }
+        }
+
+	stage("Install kubectl"){
             steps {
                 sh """
                     curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
@@ -42,26 +31,36 @@ pipeline {
 		
             }
         }
-
-
-        
-        stage ('Deploy to Cluster') {
+	
+        stage('Deploy to Kubernetes') {
             steps {
-                sh "aws eks update-kubeconfig --region eu-west-1 --name $CLUSTERID"
-                sh " envsubst < ${WORKSPACE}/deploy.yaml | ./kubectl apply -f - "
+		
+                script {
+                    // Deploy the Kubernetes manifests
+		    sh "aws eks update-kubeconfig --region eu-west-1 --name $CLUSTERID"
+                    sh 'kubectl apply -f deployment.yaml -n arca-payment-service'
+                    sh 'kubectl apply -f service.yaml -n arca-payment-service'
+                }
             }
-       
         }
-
-        stage('Remove Unused docker image') {
+	stage('Remove Unused docker image') {
           steps{
             script {
-             // sh "docker rmi -f  ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+             
               sh "docker system prune -f"
                     }
                 }
-            }
-
+        }
     }
+
+    post {
+        success {
+            echo 'Application deployed successfully!'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+
 }
 
