@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: frankisinfotech/arca-pg-personal-project-rsa-encryption-service:53  # Replace with your actual image name and tag
+        image: frankisinfotech/arca-pg-personal-project-rsa-encryption-service:60  # Replace with your actual image name and tag
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
