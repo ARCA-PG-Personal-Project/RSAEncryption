@@ -37,8 +37,8 @@ pipeline {
                 script {
                     // Deploy the Kubernetes manifests
 		    sh "aws eks update-kubeconfig --region eu-west-1 --name $CLUSTERID"
-                    sh '/home/ec2-user/bin/kubectl apply -f deployment.yaml -n rsa-service'
-                    sh '/home/ec2-user/bin/kubectl apply -f service.yaml -n rsa-service'
+                    sh '/var/lib/jenkins/workspace/ay-frontend-v2_RSAEncryption_dev/kubectl apply -f deployment.yaml -n rsa-service'
+                    sh /var/lib/jenkins/workspace/ay-frontend-v2_RSAEncryption_dev/kubectl apply -f service.yaml -n rsa-service'
                 }
             }
         }
