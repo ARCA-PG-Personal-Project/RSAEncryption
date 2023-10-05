@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-service
+  name: rsa-encryption-service
   namespace: arca-payment-service
 spec:
   replicas: 1  
