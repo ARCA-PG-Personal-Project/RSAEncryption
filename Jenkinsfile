@@ -52,14 +52,6 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            echo 'Application deployed successfully!'
-        }
-        failure {
-            echo 'Deployment failed.'
-        }
-    }
-
+    
 }
 
