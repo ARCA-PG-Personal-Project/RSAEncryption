@@ -5,7 +5,6 @@ pipeline {
         SERVICE_NAME = "rsa-encryption-service"
         ORGANIZATION_NAME = "arca-pg-personal-project"
         DOCKERHUB_USERNAME = "frankisinfotech"
-	composeFile = "docker-compose.yml"
 	REPOSITORY_TAG = "${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}"
     }
     
