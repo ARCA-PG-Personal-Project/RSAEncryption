@@ -29,8 +29,8 @@ pipeline {
                 script {
                     // Deploy the Kubernetes manifests
 		    sh "aws eks update-kubeconfig --region eu-west-1 --name $CLUSTERID"
-                    sh '/var/lib/jenkins/workspace/ay-frontend-v2_RSAEncryption_dev/kubectl apply -f deployment.yaml -n arca-payment-service'
-                    sh '/var/lib/jenkins/workspace/ay-frontend-v2_RSAEncryption_dev/kubectl apply -f service.yaml -n arca-payment-service'
+                    sh '$kubectl apply -f deployment.yaml -n arca-payment-service'
+                    sh '$kubectl apply -f service.yaml -n arca-payment-service'
                 }
             }
         }
