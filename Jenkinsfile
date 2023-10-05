@@ -14,7 +14,7 @@ pipeline {
 		withDockerRegistry([credentialsId: 'docker-hub', url: ""]){
                 script {
                     // Build the Docker image
-                    docker.build('${REPOSITORY_TAG}', '-f Dockerfile .')
+                    sh 'docker build -t ${REPOSITORY_TAG} .'
 		    sh 'docker push ${REPOSITORY_TAG}'
                 }
 		}
