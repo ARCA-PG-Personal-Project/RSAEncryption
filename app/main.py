@@ -26,7 +26,7 @@ class Order(BaseModel):
   currency: str
 
 class Payment(BaseModel):
-  redirect: str
+  redirect_url: str
 
 class Card(BaseModel):
   cvv: str
